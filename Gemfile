@@ -18,6 +18,7 @@ group :test do
   gem 'rspec-mocks'
   gem 'guard-rspec'
   gem 'webmock'
+  gem 'shoulda-matchers'
 end
 
 group :development, :test do

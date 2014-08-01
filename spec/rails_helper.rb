@@ -41,3 +41,13 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 end
+
+RSpec.configure do |c|
+  c.before :each, allow_net: true do
+    WebMock.allow_net_connect!
+  end
+
+  c.after :each, allow_net: true do
+    WebMock.disable_net_connect!
+  end
+end

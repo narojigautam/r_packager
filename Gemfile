@@ -11,6 +11,7 @@ gem 'turbolinks'
 gem 'less-rails'
 gem 'haml-rails'
 gem 'twitter-bootstrap-rails'
+gem 'httparty'
 
 group :test do
   gem 'rspec-rails', '~> 3.0.0'

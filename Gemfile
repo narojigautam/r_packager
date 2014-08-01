@@ -15,10 +15,11 @@ gem 'twitter-bootstrap-rails'
 group :test do
   gem 'rspec-rails', '~> 3.0.0'
   gem 'rspec-mocks'
+  gem 'guard-rspec'
   gem 'webmock'
 end
 
 group :development, :test do
-  gem 'pry'
+  gem 'pry', '~> 0.9.10'
   gem 'spring'
 end

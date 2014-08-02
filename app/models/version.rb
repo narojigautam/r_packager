@@ -38,4 +38,8 @@ class Version < ActiveRecord::Base
       VersionCommitter.create(version_id: id, author_id: v_maintainer.id, role: "maintainer")
     end
   end
+
+  def author_identity
+    "#{author.name}, (#{author.email})" if author
+  end
 end

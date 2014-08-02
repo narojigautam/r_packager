@@ -7,6 +7,7 @@ class PackageRefinementJob
     version = Version.find(version_id)
     package = version.r_package
     package_extractor = RPackageExtractor.new(version.package_name, version.number)
+    package_extractor.set_package_info
     package_hash = package_extractor.package_hash
     version_hash = package_extractor.version_hash
     version.update(version_hash)

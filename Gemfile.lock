@@ -1,13 +1,3 @@
-GIT
-  remote: git://github.com/resque/resque.git
-  revision: 8f13ad5b61a2c68dcf9f92980920008184359099
-  specs:
-    resque (2.0.0.pre.1)
-      json
-      mono_logger (~> 1.0)
-      redis-namespace (>= 1.3.0)
-      thor (~> 0.17)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -110,6 +100,8 @@ GEM
       method_source (~> 0.8)
       slop (~> 3.4)
     rack (1.5.2)
+    rack-protection (1.5.3)
+      rack
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.1.4)
@@ -151,6 +143,12 @@ GEM
     redis-store (1.1.4)
       redis (>= 2.2)
     ref (1.0.5)
+    resque (1.25.2)
+      mono_logger (~> 1.0)
+      multi_json (~> 1.0)
+      redis-namespace (~> 1.3)
+      sinatra (>= 0.9.2)
+      vegas (~> 0.1.2)
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
@@ -180,6 +178,10 @@ GEM
       sprockets-rails (~> 2.0)
     shoulda-matchers (2.6.2)
       activesupport (>= 3.0.0)
+    sinatra (1.4.5)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
     slop (3.6.0)
     spring (1.1.3)
     sprockets (2.11.0)
@@ -213,6 +215,8 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    vegas (0.1.11)
+      rack (>= 1.0.0)
     webmock (1.17.4)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
@@ -231,7 +235,7 @@ DEPENDENCIES
   pry (~> 0.9.10)
   rails (= 4.1.4)
   redis-rails
-  resque (~> 2.0.0.pre.1)!
+  resque
   rspec-mocks
   rspec-rails (~> 3.0.0)
   sass-rails (~> 4.0.3)

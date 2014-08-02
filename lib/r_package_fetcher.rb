@@ -64,10 +64,13 @@ class RPackageFetcher
 
   def get_request(url)
     HTTParty.get(URI.encode(url))
+  rescue => error
+    Rails.logger.warn "#{error.class.to_s}: #{error.message}"
   end
 
   def get_packages_info
-    @response ||= get_request(packages_info_url)
+    return @response.body if @response
+    @response = get_request(packages_info_url)
     @response.body
   end
 

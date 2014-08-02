@@ -51,6 +51,10 @@ class RPackageFetcher
     @import_hash ||= "#{generate_sha_hash_for(get_packages_info)}"
   end
 
+  def temp_package_file_path
+    "/tmp/#{package_filename}"
+  end
+
   private
 
   # URL from where we can get a list of R packages
@@ -69,10 +73,6 @@ class RPackageFetcher
 
   def build_package_url
     "#{@@cran_url}#{package_filename}"
-  end
-
-  def temp_package_file_path
-    "/tmp/#{package_filename}"
   end
 
   def generate_sha_hash_for response

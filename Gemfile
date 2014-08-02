@@ -13,6 +13,7 @@ gem 'haml-rails'
 gem 'twitter-bootstrap-rails'
 gem 'httparty'
 gem 'redis-rails'
+gem 'resque', '~> 2.0.0.pre.1', github: 'resque/resque'
 
 group :test do
   gem 'rspec-rails', '~> 3.0.0'

@@ -1,6 +1,8 @@
 require 'package_refinement_job'
 class RPackage < ActiveRecord::Base
   has_many :versions
+  has_many :authors, through: :versions
+  has_many :maintainers, through: :versions
 
   validates_presence_of :name
 

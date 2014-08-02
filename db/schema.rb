@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140801220248) do
+ActiveRecord::Schema.define(version: 20140802113220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authors", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "authors", ["email"], name: "index_authors_on_email", using: :btree
 
   create_table "r_packages", force: true do |t|
     t.string   "name"
@@ -28,6 +37,12 @@ ActiveRecord::Schema.define(version: 20140801220248) do
 
   add_index "r_packages", ["name"], name: "index_r_packages_on_name", using: :btree
   add_index "r_packages", ["title"], name: "index_r_packages_on_title", using: :btree
+
+  create_table "version_committers", force: true do |t|
+    t.integer "author_id"
+    t.integer "version_id"
+    t.string  "role"
+  end
 
   create_table "versions", force: true do |t|
     t.string   "number"

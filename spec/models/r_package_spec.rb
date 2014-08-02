@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe RPackage, :type => :model do
+  it { should have_many(:versions) }
+  it { should have_many(:maintainers) }
+  it { should have_many(:authors) }
   it { should validate_presence_of(:name) }
 
   context "#update_version" do

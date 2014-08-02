@@ -40,14 +40,17 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
-end
+  config.include FactoryGirl::Syntax::Methods
 
-RSpec.configure do |c|
-  c.before :each, allow_net: true do
+  config.before(:suite) do
+    FactoryGirl.lint
+  end
+
+  config.before :each, allow_net: true do
     WebMock.allow_net_connect!
   end
 
-  c.after :each, allow_net: true do
+  config.after :each, allow_net: true do
     WebMock.disable_net_connect!
   end
 end

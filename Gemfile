@@ -21,6 +21,7 @@ group :test do
   gem 'guard-rspec'
   gem 'webmock'
   gem 'shoulda-matchers'
+  gem 'factory_girl_rails', '~> 4.0'
 end
 
 group :development, :test do

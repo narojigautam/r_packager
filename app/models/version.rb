@@ -15,4 +15,27 @@ class Version < ActiveRecord::Base
   def package_name
     r_package.name
   end
+
+  def set_author author_hash
+    return unless author_hash[:email].present?
+    v_author = Author.find_or_create_by email: author_hash[:email]
+    v_author.update(author_hash)
+    if author_committer and author_committer.role != "author"
+      author_committer.update(role: "all")
+    else
+      VersionCommitter.create(version_id: id, author_id: v_author.id, role: "author")
+    end
+  end
+
+  def add_maintainer maintainer_hash
+    return unless maintainer_hash[:email].present?
+    v_maintainer = Author.find_or_create_by email: maintainer_hash[:email]
+    v_maintainer.update(maintainer_hash)
+    maintainer_committer = maintainer_committers.find_by(author_id: v_maintainer.id, role: "maintainer")
+    if maintainer_committer
+      maintainer_committer.update({role: "all"})
+    else
+      VersionCommitter.create(version_id: id, author_id: v_maintainer.id, role: "maintainer")
+    end
+  end
 end

@@ -13,19 +13,19 @@ FactoryGirl.define do
     r_package
   end
 
-  factory :author_committer, :class => :version_committer do
+  factory :author_committer, :class => "VersionCommitter" do
     author
     version
     role "author"
   end
 
-  factory :maintainer_committer, :class => :version_committer do
+  factory :maintainer_committer, :class => "VersionCommitter" do
     maintainer
     version
     role "maintainer"
   end
 
-  factory :owner_committer, :class => :version_committer do
+  factory :owner_committer, :class => "VersionCommitter" do
     author
     version
     role "all"

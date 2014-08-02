@@ -46,9 +46,26 @@ class RPackageExtractor
   #
   def parse_package_description
     @package_desc = @package_desc.split("\n")
+    # DESCRIPTION file sometimes has extra \n which creates issues in parsing
+    # following block will take care of those
+    @package_desc.each_index do |i|
+      next if @package_desc[i].match(":")
+      @package_desc[i-1] += @package_desc[i]
+      @package_desc.delete_at(i)
+    end
     @package_desc.collect! do |package_data|
       package_data = package_data.split(":")
     end
-    @package_desc = Hash[@package_desc]
+    @package_desc = parse_into_hash(@package_desc)
+  end
+
+  private
+
+  def parse_into_hash array
+    response = {}
+    array.each do |key_val|
+      response[key_val[0]] = key_val[1]
+    end
+    response
   end
 end

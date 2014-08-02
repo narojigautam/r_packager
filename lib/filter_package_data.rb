@@ -21,9 +21,10 @@ module FilterPackageData
   end
 
   def filter_into_author package_author
+    name_str, email_str = package_author.split("<")
     {
-      name: package_author.split("<")[0].try(:strip),
-      email: package_author.split("<")[1].tr(">",'')
+      name: name_str.try(:strip),
+      email: email_str.try(:tr,">",'')
     }
   end
 

@@ -1,7 +1,7 @@
 class RPackage < ActiveRecord::Base
   has_many :versions
 
-  validates_presence_of :name, :title
+  validates_presence_of :name
 
   def update_version version_data
     version = versions.find_by number: version_data[:number]

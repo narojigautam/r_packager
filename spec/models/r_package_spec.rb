@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe RPackage, :type => :model do
   it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:title) }
 
   context "#update_version" do
     let!(:r_pack) { RPackage.create name: "test package", title: "test title" }

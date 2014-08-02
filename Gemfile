@@ -12,6 +12,7 @@ gem 'less-rails'
 gem 'haml-rails'
 gem 'twitter-bootstrap-rails'
 gem 'httparty'
+gem 'redis-rails'
 
 group :test do
   gem 'rspec-rails', '~> 3.0.0'

@@ -6,9 +6,16 @@ class RPackageHoarder
 
   def initialize
     @fetcher = RPackageFetcher.new
+    @redis = Redis.new
+  end
+
+  def package_updates_available?
+    last_import_hash = @redis.get "last-package-import-hash"
+    @fetcher.new_import_hash != last_import_hash
   end
 
   def update_package_list
+    return unless package_updates_available?
     packages = @fetcher.get_packages_list
     packages.each do |package_d|
       package = filter_into_package package_d
@@ -16,6 +23,7 @@ class RPackageHoarder
       r_package ||= RPackage.create package
       r_package.update_version filter_into_version(package)
     end
+    @redis.set "last-package-import-hash", @fetcher.new_import_hash
   end
 
   def filter_into_version package

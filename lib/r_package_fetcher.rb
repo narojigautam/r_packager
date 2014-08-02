@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 # This class takes care of fetching the R Package Files and a list of Packages available
 #
 class RPackageFetcher
@@ -37,6 +39,11 @@ class RPackageFetcher
     "#{@package_name}_#{@version}#{@@package_ext}"
   end
 
+  # A method to check if there are any new updates available for packages
+  def new_import_hash
+    @import_hash ||= "#{generate_sha_hash_for(get_packages_info)}"
+  end
+
   private
 
   # URL from where we can get a list of R packages
@@ -49,8 +56,8 @@ class RPackageFetcher
   end
 
   def get_packages_info
-    response = get_request(packages_info_url)
-    response.body
+    @response ||= get_request(packages_info_url)
+    @response.body
   end
 
   def build_package_url
@@ -59,6 +66,10 @@ class RPackageFetcher
 
   def temp_package_file_path
     "/tmp/#{package_filename}"
+  end
+
+  def generate_sha_hash_for response
+    Digest::SHA1.hexdigest response
   end
 
 end

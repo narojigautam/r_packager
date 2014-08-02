@@ -8,13 +8,12 @@ require 'filter_package_data'
 class RPackageExtractor
   include FilterPackageData
 
-  attr_accessor :package_hash, :version_hash
+  attr_accessor :package_hash, :version_hash, :author_hash, :package_desc
 
   def initialize(package, ver)
     @package_name, @version = package, ver
     @fetcher = RPackageFetcher.new
-    @package_hash, @version_hash = {}, {}
-    download_and_extract_package
+    @package_hash, @version_hash, @author_hash = {}, {}, {}
     @package_desc = ""
   end
 
@@ -29,7 +28,6 @@ class RPackageExtractor
       end
     end
     FileUtils.rm_rf @fetcher.temp_package_file_path
-    @package_desc
   end
 
   # This method calls the download package method and stores result as usable package data
@@ -37,7 +35,19 @@ class RPackageExtractor
   #
   def set_package_info
     download_and_extract_package
+    parse_package_description
     @package_hash = filter_into_package @package_desc
     @version_hash = filter_into_version @package_desc
+    @author_hash  = filter_into_author  @package_desc["Author"]
+  end
+
+  # This method takes response from reading the description file and parses it into a hash
+  #
+  def parse_package_description
+    @package_desc = @package_desc.split("\n")
+    @package_desc.collect! do |package_data|
+      package_data = package_data.split(":")
+    end
+    @package_desc = Hash[@package_desc]
   end
 end

@@ -20,6 +20,13 @@ module FilterPackageData
     }
   end
 
+  def filter_into_author package_author
+    {
+      name: package_author.split("<")[0].try(:strip),
+      email: package_author.split("<")[1].tr(">",'')
+    }
+  end
+
   private
 
   def parse_date date_str

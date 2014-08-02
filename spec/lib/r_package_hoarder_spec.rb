@@ -36,4 +36,10 @@ RSpec.describe RPackageHoarder, :type => :class do
       expect(r_hoarder.package_updates_available?).to be_falsey
     end
   end
+
+  context "#filter_into_author" do
+    it "separates out author name and email" do
+      expect(r_hoarder.filter_into_author("snarf <sna@rf.com>")).to eq({email: "sna@rf.com", name: "snarf"})
+    end
+  end
 end

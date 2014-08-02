@@ -1,1 +1,18 @@
-%h3 The R Package Finder makes it very easy to look for R packages
+.page-header
+  %h1 The R Package Finder makes it very easy to look for R packages
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Title
+      %th Description
+      %th Created On
+      %th License
+  %tbody
+    - @r_packages.each do |r_package|
+      %tr
+        %td= link_to r_package.name, r_package_path(r_package)
+        %td= r_package.title
+        %td= r_package.description
+        %td= r_package.date_created
+        %td= r_package.license

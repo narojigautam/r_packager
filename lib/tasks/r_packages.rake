@@ -8,4 +8,12 @@ namespace :r_packages do
     r_package_hoarder.update_package_list
     p "R Packages updated."
   end
+
+  desc "Forcefully update the packages"
+  task force_update_package_list: :environment do
+    r_package_hoarder = RPackageHoarder.new
+    p "Forcful update for R Packages"
+    r_package_hoarder.force_update_package_list
+    p "R Packages updated."
+  end
 end

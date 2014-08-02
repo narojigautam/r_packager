@@ -20,10 +20,19 @@ class RPackageHoarder
     packages.each do |package_d|
       package = filter_into_package package_d
       r_package = RPackage.find_by name: package[:name]
-      r_package ||= RPackage.create package
-      r_package.update_version filter_into_version(package)
+      if r_package.present?
+        r_package.update package
+      else
+        r_package = RPackage.create package
+      end
+      r_package.update_version filter_into_version(package_d)
     end
     @redis.set "last-package-import-hash", @fetcher.new_import_hash
+  end
+
+  def force_update_package_list
+    @redis.set "last-package-import-hash", "failedhash"
+    update_package_list
   end
 
   def filter_into_version package

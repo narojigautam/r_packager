@@ -23,6 +23,13 @@ class RPackageFetcher
     File.open(temp_package_file_path)
   end
 
+  # A method to get the external URL to the package
+  #
+  def get_package_url_for(package, version)
+    @package_name, @version = package, version
+    build_package_url
+  end
+
   # Follwing method returns a list of R Packages in Hash format
   def get_packages_list
     packages_response = get_packages_info

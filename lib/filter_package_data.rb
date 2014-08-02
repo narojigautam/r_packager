@@ -2,11 +2,11 @@ module FilterPackageData
   def filter_into_version package
     {
       number: package["Version"].try(:strip),
-      author: package["Author"].try(:strip),
       released_on: parse_date(package["Date"]),
       dependency: package["Depends"].try(:strip),
       lazy_data: package["LazyData"].try(:strip),
-      repository: package["Repository"].try(:strip)
+      repository: package["Repository"].try(:strip),
+      publication_date: parse_date_time(package["Date/Publication"])
     }
   end
 
@@ -24,5 +24,9 @@ module FilterPackageData
 
   def parse_date date_str
     Date.parse(date_str) if date_str.present?
+  end
+
+  def parse_date_time date_time_str
+    DateTime.parse(date_time_str) if date_time_str.present?
   end
 end

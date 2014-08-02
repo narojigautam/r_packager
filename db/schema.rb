@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140802113220) do
+ActiveRecord::Schema.define(version: 20140802170508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 20140802113220) do
 
   create_table "versions", force: true do |t|
     t.string   "number"
-    t.string   "author"
     t.date     "released_on"
     t.string   "dependency"
     t.boolean  "lazy_data"
@@ -54,9 +53,9 @@ ActiveRecord::Schema.define(version: 20140802113220) do
     t.integer  "r_package_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "publication_date"
   end
 
-  add_index "versions", ["author"], name: "index_versions_on_author", using: :btree
   add_index "versions", ["number"], name: "index_versions_on_number", using: :btree
 
 end

@@ -32,15 +32,15 @@
       %th Author
       %th Released on
       %th Dependency
-      %th Lazy Data
+      %th Date/Publication
       %th Repository
   %tbody
     - @versions.each do |version|
       %tr
         %td= version.number
-        %td= version.author
+        %td= TODO
         %td= version.released_on
         %td= version.dependency
-        %td= version.lazy_data
+        %td= version.publication_date
         %td= version.repository
         %td= link_to "Download", download_path_for(@r_package.name, version.number), :class => 'btn'

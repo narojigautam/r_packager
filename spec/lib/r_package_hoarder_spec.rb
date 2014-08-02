@@ -21,7 +21,8 @@ RSpec.describe RPackageHoarder, :type => :class do
     it "fetches packages and stores them in RPackage model" do
       Redis.new.set "last-package-import-hash", "snarfhash"
       r_hoarder.update_package_list
-      expect(RPackage.pluck(:name)).to eq ["A3", "abc"]
+      expect(RPackage.pluck(:name)).to include("A3")
+      expect(RPackage.pluck(:name)).to include("abc")
     end
   end
 

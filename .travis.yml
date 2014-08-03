@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+- 2.0.0
+- 1.9.3
+script: bundle exec rspec spec
+deploy:
+  provider: heroku
+  app: r-packager
+  api_key:
+    secure: MwNoISV4berQD2QkkM1t7s35yGKT5Tn1BsLn54cBnKbNDRFrAQ1eL+iUSN8tCwbhld3lNAvB1lS6R9c2+nFDxqGqn30p5r0FiFDSBdOe8zktXkOOoZh9/20ST2WFioJ1zw6NGLQzZnOKzBG/PGMfznp0K7L5QNQ/4NB7NE8omug=

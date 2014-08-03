@@ -47,14 +47,13 @@ RSpec.describe Version, :type => :model do
     let(:author)  { create(:author, email: "gautam@naroji.com") }
 
     it "sets author of the version" do
-      version.set_author( {email: "gautam@naroji.com", name: "Gautam Naroji"} )
+      version.set_author({email: "gautam@naroji.com", name: "Gautam Naroji"})
 
-      expect(version.author.email).to eq "gautam@naroji.com"
+      expect(version.reload.author.email).to eq "gautam@naroji.com"
       expect(version.author.name).to eq "Gautam Naroji"
     end
 
     it "sets owner of the version if its already maintainer" do
-      pending "weirdness"
       maintainer_committer = create(:maintainer_committer, version: version, maintainer: author)
       expect(maintainer_committer.role).to eq "maintainer"
       version.set_author( {email: "gautam@naroji.com", name: "Gautam Naroji"} )

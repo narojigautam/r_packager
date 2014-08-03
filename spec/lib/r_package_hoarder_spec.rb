@@ -19,7 +19,7 @@ RSpec.describe RPackageHoarder, :type => :class do
     end
 
     it "fetches packages and stores them in RPackage model" do
-      Redis.new.set "last-package-import-hash", "snarfhash"
+      REDIS.set "last-package-import-hash", "snarfhash"
       r_hoarder.update_package_list
       expect(RPackage.pluck(:name)).to include("A3")
       expect(RPackage.pluck(:name)).to include("abc")
@@ -32,7 +32,7 @@ RSpec.describe RPackageHoarder, :type => :class do
     end
 
     it "returns false if the hash of last import is same as new imports hash" do
-      Redis.new.set "last-package-import-hash", "snarfhash"
+      REDIS.set "last-package-import-hash", "snarfhash"
       expect(r_hoarder.package_updates_available?).to be_falsey
     end
   end

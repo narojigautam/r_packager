@@ -8,7 +8,7 @@ class RPackageHoarder
 
   def initialize
     @fetcher = RPackageFetcher.new
-    @redis = Redis.new
+    @redis = REDIS
   end
 
   def package_updates_available?

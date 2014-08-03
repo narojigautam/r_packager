@@ -8,3 +8,8 @@ deploy:
   app: r-packager
   api_key:
     secure: MwNoISV4berQD2QkkM1t7s35yGKT5Tn1BsLn54cBnKbNDRFrAQ1eL+iUSN8tCwbhld3lNAvB1lS6R9c2+nFDxqGqn30p5r0FiFDSBdOe8zktXkOOoZh9/20ST2WFioJ1zw6NGLQzZnOKzBG/PGMfznp0K7L5QNQ/4NB7NE8omug=
+addons:
+  postgresql: "9.3"
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres

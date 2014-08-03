@@ -1,46 +1,32 @@
-- model_class = RPackage
 .page-header
-  %h1 R Package Details
-
+  %h3= @r_package.name
+  %span= @r_package.title
+%p= @r_package.description
 %p
-  %strong Name
-  %br
-  = @r_package.name
-%p
-  %strong Title
-  %br
-  = @r_package.title
-%p
-  %strong Description
-  %br
-  = @r_package.description
-%p
-  %strong Created On
-  %br
+  %strong Created On :
   = @r_package.date_created
 %p
-  %strong License
-  %br
+  %strong License :
   = @r_package.license
 
 .page-header
-  %h1 List of versions available for this R Package
+  %h4 Versions available
 %table.table.table-striped
   %thead
     %tr
       %th Number
       %th Author
+      %th Maintainers
       %th Released on
       %th Dependency
       %th Date/Publication
-      %th Repository
   %tbody
     - @versions.each do |version|
       %tr
         %td= version.number
         %td= version.author_identity
+        %td= version.maintainers_details
         %td= version.released_on
         %td= version.dependency
         %td= version.publication_date
-        %td= version.repository
         %td= link_to "Download", download_path_for(@r_package.name, version.number), :class => 'btn'

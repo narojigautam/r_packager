@@ -9,4 +9,8 @@ class Author < ActiveRecord::Base
 
   validates_presence_of :email
 
+  def identity
+    "#{name}, (#{email})"
+  end
+
 end

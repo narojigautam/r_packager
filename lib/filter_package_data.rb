@@ -32,6 +32,13 @@ module FilterPackageData
 
   def parse_date date_str
     Date.parse(date_str) if date_str.present?
+  rescue => error
+    if error.class == ArgumentError and error.message == "invalid date"
+      Rails.logger.warn "#{error.class.to_s}: #{error.message}"
+    else
+      raise error
+    end
+    return # to return nil
   end
 
   def parse_date_time date_time_str

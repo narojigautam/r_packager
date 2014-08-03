@@ -13,6 +13,8 @@ class RPackage < ActiveRecord::Base
     else
       version = Version.create version_data.merge({r_package_id: self.id})
     end
-    Resque.enqueue(PackageRefinementJob, version.id)
+    # Unhooking resque to not pay for heroku workers
+    # Resque.enqueue(PackageRefinementJob, version.id)
+    PackageRefinementJob.perform(version.id)
   end
 end
